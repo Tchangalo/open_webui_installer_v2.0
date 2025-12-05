@@ -249,7 +249,7 @@ succ "Open-WebUI running on port 3000 with GPU support."
 ```
 ---
 
-## New Features of webui_installer_v2.0
+## New Features of open_webui_installer_v2.0
 
 While _open_webui_installer_v1.0_ simply installs/sets up the four modules Docker, Docker Compose, Portainer and Open WebUI one after another, _open_webui_installer_v2.0_ prompts the user for the action to be executed and the modules:
 
