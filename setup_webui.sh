@@ -389,7 +389,6 @@ main() {
     info "==> Open-WebUI: starting removal"
     remove_webui_if_installed
     ACTIONS_PERFORMED=$((ACTIONS_PERFORMED+1))
-    WEBUI_INSTALLED=$((WEBUI_INSTALLED+1))
   fi
 
   if [ "${ACTIONS_PERFORMED}" -gt 0 ]; then
