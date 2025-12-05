@@ -226,7 +226,7 @@ sudo chmod +x setup_webui.sh
 ```
 
 Portainer is accessible in the browser at `<server-ip>:9000`, where an admin account must be created immediately.
-Open WebUI is accessible at `<server-ip>:3000`. The first startup of the Open WebUI container may take several minutes. With any subsequent reboots or boots it should jump quickly to *healthy*.
+Open WebUI is accessible at `<server-ip>:3000`. The first startup of the Open WebUI container may take several minutes. With any subsequent reboots or boots it should jump quickly to ```healthy```.
 
 ### GPU Support
 
