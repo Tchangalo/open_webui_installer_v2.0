@@ -156,14 +156,14 @@ add_user_to_docker_group() {
 
 # --- Docker Compose ---
 remove_docker_compose_if_installed() {
-  # Remove docker-compose binary if present
+  # Remove Docker Compose, if present
   if [ -x "${COMPOSE_DEST}" ] || command -v docker-compose >/dev/null 2>&1; then
-    warn "Existing docker-compose installation detected — removing."
+    warn "Existing Docker Compose installation detected — removing."
     ${SUDO} rm -f "${COMPOSE_DEST}" || true
     ${SUDO} rm -f /usr/bin/docker-compose || true
-    succ "docker-compose removed."
+    succ "Docker Compose removed."
   else
-    info "No docker-compose installation found."
+    info "No Docker Compose installation found."
   fi
 }
 
