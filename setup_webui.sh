@@ -202,16 +202,17 @@ EOF
 }
 
 install_portainer() {
-  # Remove portainer container
+  # Remove Portainer container
   if ${SUDO} docker ps -a --format '{{.Names}}' | grep -x "${PORTAINER_NAME}" >/dev/null 2>&1; then
     warn "Existing Portainer container found — removing."
     ${SUDO} docker rm -f "${PORTAINER_NAME}" || true
   fi
-  # Remove portainer volume if exists COMMENT THIS OUT, IF YOU WANT TO KEEO YOUR DATA
+  # Remove Portainer volume, if exists. COMMENT THIS OUT, IF YOU WANT TO KEEO YOUR DATA
   if ${SUDO} docker volume ls --format '{{.Name}}' | grep -x "${PORTAINER_VOLUME}" >/dev/null 2>&1; then
     ${SUDO} docker volume rm "${PORTAINER_VOLUME}" || true
     succ "Portainer volume '${PORTAINER_VOLUME}' removed."
   fi
+  
   # Create volume and run Portainer container
   ${SUDO} docker volume create "${PORTAINER_VOLUME}" >/dev/null
   info "Deploying Portainer container."
@@ -228,14 +229,14 @@ install_portainer() {
 }
 
 remove_portainer_if_installed() {
-  # Remove Portainer container and its volume
+  # Remove Portainer container
   if ${SUDO} docker ps -a --format '{{.Names}}' | grep -x "${PORTAINER_NAME}" >/dev/null 2>&1; then
     warn "Removing existing Portainer container."
     ${SUDO} docker rm -f "${PORTAINER_NAME}" || true
   else
     info "No Portainer container present."
   fi
-  # Remove portainer volume if exists COMMENT THIS OUT, IF YOU WANT TO KEEO YOUR DATA
+  # Remove Portainer volume if exists COMMENT THIS OUT, IF YOU WANT TO KEEO YOUR DATA
   if ${SUDO} docker volume ls --format '{{.Name}}' | grep -x "${PORTAINER_VOLUME}" >/dev/null 2>&1; then
     ${SUDO} docker volume rm "${PORTAINER_VOLUME}" || true
     succ "Portainer volume '${PORTAINER_VOLUME}' removed."
@@ -244,8 +245,8 @@ remove_portainer_if_installed() {
 
 # --- Open-WebUI ---
 install_webui() {
-  # Deploy Open-WebUI container (ollama-backed)
   info "Starting Open-WebUI installation."
+  # Remove Open WebUI Container, if exists
   if ${SUDO} docker ps -a --format '{{.Names}}' | grep -x "open-webui" >/dev/null 2>&1; then
     warn "Existing open-webui container found — removing."
     ${SUDO} docker rm -f open-webui || true
@@ -259,6 +260,8 @@ install_webui() {
     ${SUDO} docker volume rm open-webui || true
     succ "Volume 'open-webui' removed."
   fi
+
+  # Deploy Open-WebUI container (ollama-backed)
   info "Creating volumes (ollama, open-webui)."
   ${SUDO} docker volume create ollama >/dev/null || true
   ${SUDO} docker volume create open-webui >/dev/null || true
